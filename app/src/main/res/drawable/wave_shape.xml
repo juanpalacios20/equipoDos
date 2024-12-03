@@ -1,0 +1,19 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp"
+    android:height="60dp"
+    android:viewportWidth="360"
+    android:viewportHeight="60">
+
+    <!-- Fondo blanco con ondas -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="
+            M0,40
+            C20,20 40,60 60,40
+            C80,10 100,50 120,40
+            C140,30 160,70 180,40
+            C200,20 220,50 240,40
+            C260,10 280,60 300,40
+            C320,20 340,50 360,40
+            L360,60 L0,60 Z" />
+</vector>
