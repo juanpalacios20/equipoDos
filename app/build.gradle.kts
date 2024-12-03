@@ -41,6 +41,11 @@ android {
         dataBinding = true
     }
 
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true // Aquí es donde habilitas ViewBinding
+    }
+
     applicationVariants.all {
         kotlin.sourceSets {
             getByName(name) {
