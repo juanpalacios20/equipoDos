@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">picoBotella2_equipoDos</string>
+    <string name="app_name">picoBotella</string>
+    <string name="bottle_icon_desc">bottle_icon_desc</string>
+    <string name="icono_de_compartir">Icono de compartir</string>
+    <string name="icono_de_agregar_retos">Icono de agregar retos</string>
+    <string name="icono_de_instrucciones">Icono de instrucciones</string>
+    <string name="icono_de_musica">Icono de musica</string>
+    <string name="icono_de_calificaci_n">Icono de calificación</string>
+    <string name="boton_de_juego">Boton_de_juego</string>
+    <string name="presi_name">Presióname</string>
+    <string name="icono_de_volver">Icono de volver</string>
 </resources>
