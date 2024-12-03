@@ -1,0 +1,134 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wood_background">
+
+    <!-- Contenedor para centrar y delimitar la Toolbar -->
+    <LinearLayout
+        android:id="@+id/toolbar_container"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/toolbar_background"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:elevation="4dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal"
+            android:contentInsetStartWithNavigation="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Iconos de la Toolbar -->
+                <ImageButton
+                    android:id="@+id/icon_star"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/icono_de_calificaci_n"
+                    android:src="@drawable/ic_star"
+                    android:background="?attr/selectableItemBackgroundBorderless"/>
+
+                <ImageButton
+                    android:id="@+id/icon_power"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/icono_de_musica"
+                    android:src="@drawable/ic_sound"
+                    android:background="?attr/selectableItemBackgroundBorderless"/>
+
+                <ImageButton
+                    android:id="@+id/icon_instructions"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/icono_de_instrucciones"
+                    android:src="@drawable/ic_instructions"
+                    android:background="?attr/selectableItemBackgroundBorderless"/>
+
+                <ImageButton
+                    android:id="@+id/icon_add_challenges"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/icono_de_agregar_retos"
+                    android:src="@drawable/ic_add"
+                    android:background="?attr/selectableItemBackgroundBorderless"/>
+
+                <ImageButton
+                    android:id="@+id/icon_share"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/icono_de_compartir"
+                    android:src="@drawable/ic_share"
+                    android:background="?attr/selectableItemBackgroundBorderless"/>
+
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
+
+    <!-- Imagen de la botella -->
+    <ImageView
+        android:id="@+id/bottleIcon"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/bottle_icon"
+        android:contentDescription="@string/bottle_icon_desc" />
+
+    <!-- Contador de tiempo -->
+    <TextView
+        android:id="@+id/timerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4"
+        android:textSize="45sp"
+        android:textColor="@color/orange"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:fontFamily="@font/holenvintage"/>
+
+    <!-- Botón circular -->
+    <ImageButton
+        android:id="@+id/btnPressMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/circular_button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:contentDescription="@string/boton_de_juego"
+        android:background="@null" />
+    <TextView
+        android:id="@+id/text_presioname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bottleIcon"
+        android:layout_centerHorizontal="true"
+        android:text="@string/presi_name"
+        android:textColor="@color/orange"
+        android:textSize="20sp"
+        android:layout_marginTop="245dp"
+        android:fontFamily="@font/holenvintage"/>
+
+</RelativeLayout>
+
+
+
+
+

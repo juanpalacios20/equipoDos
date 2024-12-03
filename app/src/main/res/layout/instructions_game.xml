@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/dark_gray"
+    tools:context=".instructions.InstructionsActivity">
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/flecha_atras"
+        android:background="@color/dark_gray"
+        android:paddingTop="6dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/title_reglas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/holenvintage"
+        android:text="Reglas del juego"
+        android:textColor="@color/orange"
+        android:paddingTop="5dp"
+        android:textSize="64px"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/title_howtoplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¿Como se juega?"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/title_reglas"
+        tools:layout_editor_absoluteX="16dp"
+        android:paddingTop="30dp"
+        android:textSize="48px"
+        android:fontFamily="@font/holenvintage"/>
+    
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Los jugadores forman un círculo y en el centro
+colocan el dispositivo móvil, luego tocan el botón parpadeante para girar la botella.El jugador que señale la
+botella debe cumplir el reto que lanza la app, de lo contrario abandona el juego."
+        app:layout_constraintTop_toBottomOf="@+id/title_howtoplay"
+        android:paddingTop="10dp"
+        android:textSize="42px"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/title_whowin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¿Quién gana?"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/text1"
+        tools:layout_editor_absoluteX="16dp"
+        android:paddingTop="20dp"
+        android:textSize="48px"
+        android:fontFamily="@font/holenvintage"/>
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gana el último jugador que no abandone el juego."
+        app:layout_constraintTop_toBottomOf="@+id/title_whowin"
+        android:paddingTop="10dp"
+        android:textSize="42px"
+        android:textColor="@color/white"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/messi_img"
+        app:layout_constraintTop_toBottomOf="@+id/text2"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
