@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.picobotella2_equipodos.R
 import com.example.picobotella2_equipodos.databinding.HomeBinding
+import com.example.picobotella2_equipodos.view.ChallengeActivity
 import com.example.picobotella2_equipodos.service.music.MusicManager
 import java.util.*
 
@@ -127,11 +128,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun showChallenge() {
-        val dialog = ChallengeDialogFragment()
-        dialog.show(childFragmentManager, "challengeDialog")
+        // Crear un Intent para abrir ChallengeActivity
+        val intent = Intent(requireContext(), ChallengeActivity::class.java)
+        intent.putExtra("some_key", "some_value")
 
-        // También puedes manejar la lógica para cerrar el diálogo y reiniciar el parpadeo en ese punto.
+        startActivity(intent)
+
+        // Reactivar el botón en HomeFragment
+        binding.btnPressMe.isEnabled = true
+        binding.btnPressMe.visibility = ImageButton.VISIBLE
     }
+
 
     override fun onPause() {
         super.onPause()
