@@ -9,4 +9,5 @@
     <string name="boton_de_juego">Boton_de_juego</string>
     <string name="presi_name">Presióname</string>
     <string name="icono_de_volver">Icono de volver</string>
+    <string name="share" />
 </resources>

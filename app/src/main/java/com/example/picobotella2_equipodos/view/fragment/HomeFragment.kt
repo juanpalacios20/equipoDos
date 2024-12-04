@@ -1,5 +1,6 @@
 package com.example.picobotella2_equipodos.view.fragment
 
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.picobotella2_equipodos.R
 import com.example.picobotella2_equipodos.databinding.HomeBinding
+import com.example.picobotella2_equipodos.view.ChallengeActivity
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -127,13 +129,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun showChallenge() {
-        val dialog = ChallengeDialogFragment()
-        dialog.show(childFragmentManager, "challengeDialog")
+        // Crear un Intent para abrir ChallengeActivity
+        val intent = Intent(requireContext(), ChallengeActivity::class.java)
 
-        // Reactivar el botón
+        // Si necesitas pasar datos adicionales a la actividad
+        intent.putExtra("some_key", "some_value")
+
+        startActivity(intent)
+
+        // Reactivar el botón en HomeFragment
         binding.btnPressMe.isEnabled = true
         binding.btnPressMe.visibility = ImageButton.VISIBLE
     }
+
 
     override fun onPause() {
         super.onPause()
