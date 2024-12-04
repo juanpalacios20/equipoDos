@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_host_fragment"
     app:startDestination="@id/homeMain">
+
+    <!-- Fragmento HomeMain -->
     <fragment
         android:id="@+id/homeMain"
-        android:name="com.example.picobotella2_equipodos.view.home.HomeFragment"
+        android:name="com.example.picobotella2_equipodos.view.fragment.HomeFragment"
         android:label="HomeMain">
         <action
             android:id="@+id/action_homeMain_to_instructions"
@@ -16,28 +18,42 @@
         <action
             android:id="@+id/action_homeMain_to_challenge"
             app:destination="@id/challenge" />
+        <!-- Acción para navegar al LoginFragment -->
+        <action
+            android:id="@+id/action_homeMain_to_login"
+            app:destination="@id/login" />
     </fragment>
 
-
+    <!-- Fragmento Instructions -->
     <fragment
         android:id="@+id/instructions"
         android:name="com.example.picobotella2_equipodos.view.fragment.InstructionsFragment"
-        android:label="Instructions" />
-    <action
-        android:id="@+id/action_instructions_to_homeMain"
-        app:destination="@+id/homeMain" />
+        android:label="Instructions">
+        <action
+            android:id="@+id/action_instructions_to_homeMain"
+            app:destination="@id/homeMain" />
+    </fragment>
 
+    <!-- Fragmento Challenge -->
     <fragment
         android:id="@+id/challenge"
-        android:name=" "
-        android:label="Challenge" />
-    <action
-        android:id="@+id/action_challenge_to_homeMain"
-        app:destination="@+id/homeMain" />
+        android:name="com.example.picobotella2_equipodos.view.fragment.InstructionsFragment"
+        android:label="Challenge">
+        <action
+            android:id="@+id/action_challenge_to_homeMain"
+            app:destination="@id/homeMain" />
+    </fragment>
 
+    <!-- Fragmento Rate -->
     <fragment
         android:id="@+id/rate"
         android:name="com.example.picobotella2_equipodos.view.fragment.RateFragment"
         android:label="Rate" />
+
+    <!-- Fragmento Login -->
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.picobotella2_equipodos.view.fragment.LoginFragment"
+        android:label="Login" />
 
 </navigation>

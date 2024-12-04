@@ -6,7 +6,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.picobotella2_equipodos.auth.LoginFragment
+import com.example.picobotella2_equipodos.view.fragment.LoginFragment
 
 
 class MainActivity : AppCompatActivity() {
