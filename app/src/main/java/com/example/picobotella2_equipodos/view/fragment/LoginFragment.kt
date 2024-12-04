@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.picobotella2_equipodos.R
 import com.example.picobotella2_equipodos.databinding.FragmentLoginBinding
 import com.example.picobotella2_equipodos.repository.AuthRepository
+import com.example.picobotella2_equipodos.view.fragment.HomeFragment
 import com.example.picobotella2_equipodos.viewModel.AuthenticationViewModelFactory
 
 class LoginFragment : Fragment() {
@@ -76,7 +77,7 @@ class LoginFragment : Fragment() {
         viewModel.loginResult.observe(viewLifecycleOwner, Observer { success ->
             if (success) {
                 Toast.makeText(context, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
-                // Redirigir a otra pantalla si es necesario
+                navigateToHome()
             } else {
                 Toast.makeText(context, "Login incorrecto", Toast.LENGTH_SHORT).show()
             }
@@ -86,11 +87,19 @@ class LoginFragment : Fragment() {
         viewModel.registerResult.observe(viewLifecycleOwner, Observer { success ->
             if (success) {
                 Toast.makeText(context, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                // Redirigir a otra pantalla si es necesario
+                navigateToHome()
             } else {
                 Toast.makeText(context, "Error en el registro", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun navigateToHome() {
+        val homeFragment = HomeFragment()
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, homeFragment)
+            .addToBackStack(null) // Opcional: permite regresar a LoginFragment con el botón de retroceso
+            .commit()
     }
 
     private val passwordWatcher = object : TextWatcher {

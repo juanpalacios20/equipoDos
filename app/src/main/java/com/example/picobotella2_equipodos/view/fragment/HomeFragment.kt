@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.RotateAnimation
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -15,7 +16,7 @@ import com.example.picobotella2_equipodos.R
 import com.example.picobotella2_equipodos.databinding.HomeBinding
 import java.util.*
 
-class HomeFragment : Fragment(R.layout.home) {
+class HomeFragment : Fragment() {
 
     private var _binding: HomeBinding? = null
     private val binding get() = _binding!!
@@ -26,13 +27,21 @@ class HomeFragment : Fragment(R.layout.home) {
     private val spinDuration = 3000L // Duración del giro (3 segundos)
     private val maxRotation = 360f // 360 grados
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = HomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Inicializar las vistas
-        val btnPressMe: ImageButton = binding.root.findViewById(R.id.btnPressMe)
-        val bottleIcon: ImageView = binding.root.findViewById(R.id.bottleIcon)
-        val timerText: TextView = binding.root.findViewById(R.id.timerText)
+        val btnPressMe: ImageButton = binding.btnPressMe
+        val bottleIcon: ImageView = binding.bottleIcon
+        val timerText: TextView = binding.timerText
 
         // Inicializar MediaPlayer para el sonido de la botella girando
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.spin_sound)
@@ -122,9 +131,8 @@ class HomeFragment : Fragment(R.layout.home) {
         dialog.show(childFragmentManager, "challengeDialog")
 
         // Reactivar el botón
-        val btnPressMe: ImageButton = binding.root.findViewById(R.id.btnPressMe)
-        btnPressMe.isEnabled = true
-        btnPressMe.visibility = ImageButton.VISIBLE
+        binding.btnPressMe.isEnabled = true
+        binding.btnPressMe.visibility = ImageButton.VISIBLE
     }
 
     override fun onPause() {
@@ -133,9 +141,8 @@ class HomeFragment : Fragment(R.layout.home) {
         mediaPlayer.pause()
     }
 
-    override fun onResume() {
-        super.onResume()
-        // Reanudar el sonido
-        if (isSpinning) mediaPlayer.start()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
