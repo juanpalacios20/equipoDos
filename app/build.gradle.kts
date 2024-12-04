@@ -55,6 +55,8 @@ dependencies {
     // Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.4")
+    implementation("androidx.navigation:navigation-ui:2.8.4")
 
     // Core Libraries
     implementation(libs.androidx.core.ktx)

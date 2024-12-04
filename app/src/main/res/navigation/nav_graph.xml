@@ -2,7 +2,18 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_host_fragment"
-    app:startDestination="@id/homeMain">
+    app:startDestination="@id/login">
+
+    <!-- Fragmento Login -->
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.picobotella2_equipodos.view.fragment.LoginFragment"
+        android:label="Login">
+        <!-- Acción para ir a Home -->
+        <action
+            android:id="@+id/action_login_to_homeMain"
+            app:destination="@id/homeMain" />
+    </fragment>
 
     <!-- Fragmento HomeMain -->
     <fragment
@@ -18,7 +29,6 @@
         <action
             android:id="@+id/action_homeMain_to_challenge"
             app:destination="@id/challenge" />
-        <!-- Acción para navegar al LoginFragment -->
         <action
             android:id="@+id/action_homeMain_to_login"
             app:destination="@id/login" />
@@ -49,11 +59,4 @@
         android:id="@+id/rate"
         android:name="com.example.picobotella2_equipodos.view.fragment.RateFragment"
         android:label="Rate" />
-
-    <!-- Fragmento Login -->
-    <fragment
-        android:id="@+id/login"
-        android:name="com.example.picobotella2_equipodos.view.fragment.LoginFragment"
-        android:label="Login" />
-
 </navigation>

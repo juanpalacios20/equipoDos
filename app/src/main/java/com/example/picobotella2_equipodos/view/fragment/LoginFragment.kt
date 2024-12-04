@@ -13,12 +13,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.picobotella2_equipodos.R
 import com.example.picobotella2_equipodos.databinding.FragmentLoginBinding
 import com.example.picobotella2_equipodos.repository.AuthRepository
 import com.example.picobotella2_equipodos.viewModel.AuthenticationViewModelFactory
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
@@ -60,14 +61,7 @@ class LoginFragment : Fragment() {
 
         // Texto para registrarse
         binding.tvRegister.setOnClickListener {
-            val email = binding.etEmail.text.toString().trim()
-            val password = binding.etPassword.text.toString().trim()
-
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                viewModel.registerUser(email, password)
-            } else {
-                Toast.makeText(context, "Por favor llena ambos campos", Toast.LENGTH_SHORT).show()
-            }
+            Toast.makeText(context, "Función de registro no implementada", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -76,19 +70,10 @@ class LoginFragment : Fragment() {
         viewModel.loginResult.observe(viewLifecycleOwner, Observer { success ->
             if (success) {
                 Toast.makeText(context, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
-                // Redirigir a otra pantalla si es necesario
+                // Navegar a HomeFragment
+                findNavController().navigate(R.id.action_login_to_homeMain)
             } else {
-                Toast.makeText(context, "Login incorrecto", Toast.LENGTH_SHORT).show()
-            }
-        })
-
-        // Observador para el resultado del registro
-        viewModel.registerResult.observe(viewLifecycleOwner, Observer { success ->
-            if (success) {
-                Toast.makeText(context, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                // Redirigir a otra pantalla si es necesario
-            } else {
-                Toast.makeText(context, "Error en el registro", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -97,34 +82,11 @@ class LoginFragment : Fragment() {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            val password = binding.etPassword.text.toString().trim()
-            validatePassword(password)
-            validateInputs()  // Llamar a validateInputs para verificar ambos campos
+            validatePassword(binding.etPassword.text.toString().trim())
+            validateInputs()
         }
 
         override fun afterTextChanged(s: Editable?) {}
-    }
-
-    private fun validatePassword(password: String) {
-        when {
-            password.isEmpty() -> {
-                // Si el campo está vacío, mantener el borde blanco y eliminar cualquier mensaje de error
-                binding.tilPassword.isErrorEnabled = false // Oculta el error correctamente
-                binding.tilPassword.boxStrokeColor = ContextCompat.getColor(requireContext(), android.R.color.white)
-            }
-            password.length < 6 -> {
-                // Mostrar mensaje de error y cambiar el borde a rojo
-                binding.tilPassword.error = "Mínimo 6 dígitos"
-                binding.tilPassword.isErrorEnabled = true // Asegurarse de que el error se muestre
-                binding.tilPassword.boxStrokeColor = ContextCompat.getColor(requireContext(), R.color.red)
-            }
-            else -> {
-                // Borrar el mensaje de error y volver a color blanco
-                binding.tilPassword.isErrorEnabled = false // Oculta el error completamente
-                binding.tilPassword.error = null // Asegura que no hay texto de error
-                binding.tilPassword.boxStrokeColor = ContextCompat.getColor(requireContext(), android.R.color.white)
-            }
-        }
     }
 
     private val textWatcher = object : TextWatcher {
@@ -137,32 +99,18 @@ class LoginFragment : Fragment() {
         override fun afterTextChanged(s: Editable?) {}
     }
 
+    private fun validatePassword(password: String) {
+        if (password.length < 6) {
+            binding.tilPassword.error = "Mínimo 6 dígitos"
+        } else {
+            binding.tilPassword.error = null
+        }
+    }
+
     private fun validateInputs() {
         val email = binding.etEmail.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
-
-        val isValid = email.isNotEmpty() && password.isNotEmpty()
-
-        // Cambiar el estado del botón de login
-        binding.btnLogin.isEnabled = isValid
-        val textColor = if (isValid) {
-            ContextCompat.getColor(requireContext(), android.R.color.white)
-        } else {
-            ContextCompat.getColor(requireContext(), R.color.orange_dark) // Naranja oscuro
-        }
-        binding.btnLogin.setTextColor(textColor)
-
-        // Habilitar o deshabilitar el TextView "Registrarse"
-        binding.tvRegister.isEnabled = isValid
-        if (isValid) {
-            // Cambiar a color blanco y negrita
-            binding.tvRegister.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
-            binding.tvRegister.setTypeface(binding.tvRegister.typeface, Typeface.BOLD)
-        } else {
-            // Volver a color gris cuando esté deshabilitado
-            binding.tvRegister.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
-            binding.tvRegister.setTypeface(binding.tvRegister.typeface, Typeface.NORMAL)
-        }
+        binding.btnLogin.isEnabled = email.isNotEmpty() && password.isNotEmpty()
     }
 
     override fun onDestroyView() {
