@@ -37,5 +37,20 @@
             android:exported="true">
         </activity>
 
+        <activity android:name=".view.InstructionsActivity"
+            android:exported="true"
+            >
+        </activity>
+
+        <activity android:name=".view.retos.RetoActivity"
+            android:exported="true"
+            >
+        </activity>
+        <activity android:name=".view.TestDB"
+            android:exported="true"
+            >
+        </activity>
+
+        <service android:name=".music.MusicService" />
     </application>
 </manifest>
