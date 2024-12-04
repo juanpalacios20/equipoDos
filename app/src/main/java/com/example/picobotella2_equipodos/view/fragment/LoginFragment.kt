@@ -44,6 +44,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
         observeViewModel()
+
     }
 
     private fun setupListeners() {
@@ -78,6 +79,7 @@ class LoginFragment : Fragment() {
             if (success) {
                 Toast.makeText(context, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
                 navigateToHome()
+
             } else {
                 Toast.makeText(context, "Login incorrecto", Toast.LENGTH_SHORT).show()
             }
@@ -88,6 +90,7 @@ class LoginFragment : Fragment() {
             if (success) {
                 Toast.makeText(context, "Registro exitoso", Toast.LENGTH_SHORT).show()
                 navigateToHome()
+
             } else {
                 Toast.makeText(context, "Error en el registro", Toast.LENGTH_SHORT).show()
             }
