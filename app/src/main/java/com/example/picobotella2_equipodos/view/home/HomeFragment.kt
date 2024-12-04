@@ -1,5 +1,7 @@
 package com.example.picobotella2_equipodos.view.home
 
+import android.content.Context
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -7,17 +9,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
+import android.view.animation.AnimationUtils
 import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.picobotella2_equipodos.R
 import com.example.picobotella2_equipodos.databinding.HomeBinding
+import kotlin.random.Random
 
 class HomeFragment : Fragment() {
 
     private var _binding: HomeBinding? = null
     private val binding get() = _binding!!
     private var mediaPlayer: MediaPlayer? = null
+    private var bottleSpinPlayer: MediaPlayer? = null
+    private var isSoundOn = true
+    private val bottleSpinSounds = arrayOf(
+        R.raw.spin_sound
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,11 +40,21 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setupToolbar()
         setupBackgroundMusic()
         setupBlinkingButton()
-        setupCountdownTimer()
-        setupToolbarIcons()
+        setupShareButton()
+    }
+
+    private fun setupToolbar() {
+        binding.toolbar.apply {
+            findViewById<ImageButton>(R.id.icon_power).setOnClickListener {
+                toggleBackgroundMusic()
+            }
+            findViewById<ImageButton>(R.id.icon_share).setOnClickListener {
+                shareApp()
+            }
+        }
     }
 
     private fun setupBackgroundMusic() {
@@ -50,39 +71,15 @@ class HomeFragment : Fragment() {
             repeatCount = AlphaAnimation.INFINITE
         }
         binding.btnPressMe.startAnimation(blinkAnimation)
+        binding.btnPressMe.setOnClickListener {
+            it.clearAnimation()
+            playRandomBottleSpinSound()
+        }
     }
 
-    private fun setupCountdownTimer() {
-        object : CountDownTimer(3000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                binding.timerText.text = (millisUntilFinished / 1000).toString()
-            }
-
-            override fun onFinish() {
-                binding.timerText.text = "0"
-            }
-        }.start()
-    }
-
-    private fun setupToolbarIcons() {
-        binding.toolbar.findViewById<ImageButton>(R.id.icon_power).setOnClickListener {
-            toggleBackgroundMusic()
-        }
-
-        binding.toolbar.findViewById<ImageButton>(R.id.icon_star).setOnClickListener {
-            // Acción para la estrella (calificación)
-        }
-
-        binding.toolbar.findViewById<ImageButton>(R.id.icon_instructions).setOnClickListener {
-            // Acción para las instrucciones
-        }
-
-        binding.toolbar.findViewById<ImageButton>(R.id.icon_add_challenges).setOnClickListener {
-            // Acción para agregar retos
-        }
-
+    private fun setupShareButton() {
         binding.toolbar.findViewById<ImageButton>(R.id.icon_share).setOnClickListener {
-            // Acción para compartir
+            shareApp()
         }
     }
 
@@ -96,13 +93,28 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun playRandomBottleSpinSound() {
+        val randomSound = bottleSpinSounds[Random.nextInt(bottleSpinSounds.size)]
+        bottleSpinPlayer = MediaPlayer.create(requireContext(), randomSound).apply {
+            start()
+            setOnCompletionListener { release() }
+        }
+    }
+
+    private fun shareApp() {
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, "¡Prueba esta increíble app! https://play.google.com/store/apps/details?id=com.example.picobotella2")
+        }
+        startActivity(Intent.createChooser(shareIntent, "Compartir vía"))
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
         mediaPlayer?.release()
+        mediaPlayer = null
+        bottleSpinPlayer?.release()
     }
 }
+
