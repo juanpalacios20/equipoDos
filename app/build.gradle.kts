@@ -1,14 +1,17 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+
+    id("com.google.gms.google-services")
+
 }
 
 android {
     namespace = "com.example.picobotella2_equipodos"
     compileSdk = 35
+
 
     defaultConfig {
         applicationId = "com.example.picobotella2_equipodos"
@@ -48,6 +51,10 @@ android {
             }
         }
     }
+    buildFeatures {
+        viewBinding = true // Activar View Binding de forma correcta
+    }
+
 }
 
 dependencies {
@@ -67,11 +74,18 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.15.1")
     implementation("com.android.volley:volley:1.2.1")
     implementation ("com.google.android.material:material:1.9.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation ("com.google.firebase:firebase-auth-ktx")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.0")
+    implementation("androidx.fragment:fragment-ktx:1.5.7")
+
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.47")
+
     implementation(libs.firebase.firestore.ktx)
-    kapt("com.google.dagger:hilt-android-compiler:2.47")
+
 
     //Testing
     testImplementation(libs.junit)

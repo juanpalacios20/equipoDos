@@ -55,7 +55,7 @@
             android:textColor="#FFFFFF"
             android:backgroundTint="#FFFFFF"
             android:inputType="textPassword"
-            android:drawableEnd="@drawable/ic_eye_icon"/>
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Botón de Login -->
@@ -94,5 +94,11 @@
         android:layout_alignParentBottom="true"
         android:scaleType="fitXY"
         android:src="@drawable/wave_shape" />
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 </RelativeLayout>
 
