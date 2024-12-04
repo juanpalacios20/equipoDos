@@ -1,9 +1,11 @@
 package com.example.picobotella2_equipodos.viewModel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.Glide
 import com.example.picobotella2_equipodos.model.Challenge
 import com.example.picobotella2_equipodos.repository.RetosRepository
 import com.example.picobotella2_equipodos.webService.RetrofitClient
@@ -34,16 +36,17 @@ class RetoViewModel : ViewModel() {
             _retoAleatorio.value = reto
         }
     }
-    fun obtenerPokemon() {
+    fun obtenerPokemon(context: Context) {
         viewModelScope.launch {
             try {
-                val pokemonName = RetrofitClient.instance.getPokemonList()
-                _pokemon.value = pokemonName.toString()
+                val pokemonImage = repository.getRandomPokemonImage(context)  // Pasamos el contexto
+                _pokemon.value = pokemonImage
             } catch (e: Exception) {
                 _pokemon.value = "Error"
             }
         }
     }
+
 
     fun agregarReto(challenge: Challenge){
         repository.agregarReto(challenge)

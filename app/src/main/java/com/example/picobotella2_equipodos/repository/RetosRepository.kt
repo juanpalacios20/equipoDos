@@ -1,18 +1,34 @@
 package com.example.picobotella2_equipodos.repository
 
+import android.app.AlertDialog
+import android.view.LayoutInflater
+import android.view.Window
+import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.Request
+import com.android.volley.toolbox.Volley
+import com.example.picobotella2_equipodos.R
 import com.example.picobotella2_equipodos.model.Challenge
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
+import android.content.Context
+import android.util.Log
+import android.widget.Button
 import com.example.picobotella2_equipodos.webService.PokemonApiService
 import com.example.picobotella2_equipodos.webService.RetrofitClient
+import com.example.picobotella2_equipodos.viewModel.PokemonViewModel
+import androidx.activity.viewModels
+import com.bumptech.glide.Glide
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
 class RetosRepository {
 
     private val db = FirebaseFirestore.getInstance()
     private val retosCollection =db.collection("challenge")
-    private val apiService = RetrofitClient.instance
+
 
     fun obtenerRetos(callback: (List<Challenge>) -> Unit) {
         db.collection("challenge")
@@ -50,16 +66,32 @@ class RetosRepository {
         }
     }
 
-    suspend fun getPokemon(): String {
-        val response = apiService.getPokemonList() // Obtener la lista de Pokémon
-        return if (response.pokemon.isNotEmpty()) {
-            // Seleccionar un Pokémon aleatorio
-            val randomPokemon = response.pokemon.random()
-            randomPokemon.img // Retornar la URL de la imagen del Pokémon
-        } else {
-            "https://www.google.com/imgres?q=pokemon&imgurl=https%3A%2F%2Fwww.pokemon.com%2Fstatic-assets%2Fcontent-assets%2Fcms2%2Fimg%2Fpokedex%2Ffull%2F007.png&imgrefurl=https%3A%2F%2Fwww.pokemon.com%2Fes%2Fpokedex%2Fsquirtle&docid=4JPd7l7-o8fBRM&tbnid=JfTWir-nzTeA7M&vet=12ahUKEwi92sDQy42KAxXJVTABHbxnG7kQM3oECFIQAA..i&w=475&h=475&hcb=2&ved=2ahUKEwi92sDQy42KAxXJVTABHbxnG7kQM3oECFIQAA"
+    suspend fun getRandomPokemonImage(context: Context): String {
+        val url = "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json"
+        val requestQueue = Volley.newRequestQueue(context)  // Usar el Contexto pasado
+
+        return suspendCancellableCoroutine { continuation ->
+            val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
+                { response ->
+                    val pokemonArray = response.getJSONArray("pokemon")
+                    if (pokemonArray.length() > 0) {
+                        val randomPokemonIndex = (0 until pokemonArray.length()).random()
+                        val randomPokemon = pokemonArray.getJSONObject(randomPokemonIndex)
+                        val imageUrl = randomPokemon.getString("img")
+                        continuation.resume(imageUrl)  // Regresar el resultado
+                    } else {
+                        continuation.resume("")  // Manejo de error
+                    }
+                },
+                { error ->
+                    continuation.resume("")  // En caso de error
+                }
+            )
+            requestQueue.add(jsonObjectRequest)
         }
     }
+
+
 
     fun agregarReto(reto: Challenge) {
         val retoRef = db.collection("challenge").document()
