@@ -9,7 +9,7 @@
 
         <TextView
             android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
@@ -18,11 +18,12 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/challengeEditText"
+            android:id="@+id/etDescripcionReto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/orange"
             android:hint="Escriba el reto"
+            android:textColor="@color/black"
             android:textColorHint="@android:color/darker_gray" />
 
         <LinearLayout
@@ -33,7 +34,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/cancelButton"
+                android:id="@+id/btnCancelar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/orange"
@@ -41,7 +42,7 @@
                 android:textColor="@android:color/white" />
 
             <Button
-                android:id="@+id/saveButton"
+                android:id="@+id/btnAgregar"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"

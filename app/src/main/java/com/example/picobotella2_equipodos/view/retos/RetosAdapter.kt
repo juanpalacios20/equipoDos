@@ -15,10 +15,10 @@ class RetoAdapter(
     private val retos: List<Challenge>,
     private val onEditClick: (Challenge) -> Unit,
     private val onDeleteClick: (Challenge) -> Unit
-) : ArrayAdapter<Challenge>(context, R.layout.item_reto, retos) {
+) : ArrayAdapter<Challenge>(context, R.layout.item_challenge, retos) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.item_reto, parent, false)
+        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.item_challenge, parent, false)
 
         val reto = getItem(position)
         val tvDescripcion: TextView = view.findViewById(R.id.tvDescripcion)
