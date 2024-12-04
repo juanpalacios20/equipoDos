@@ -56,6 +56,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.navigation.ui.ktx)
     kapt ("com.google.dagger:dagger-compiler:2.x")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

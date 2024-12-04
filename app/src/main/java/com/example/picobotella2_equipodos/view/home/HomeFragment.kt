@@ -23,98 +23,27 @@ class HomeFragment : Fragment() {
 
     private var _binding: HomeBinding? = null
     private val binding get() = _binding!!
-    private var mediaPlayer: MediaPlayer? = null
-    private var bottleSpinPlayer: MediaPlayer? = null
-    private var isSoundOn = true
-    private val bottleSpinSounds = arrayOf(
-        R.raw.spin_sound
-    )
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = HomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupToolbar()
-        setupBackgroundMusic()
-        setupBlinkingButton()
-        setupShareButton()
-    }
 
-    private fun setupToolbar() {
-        binding.toolbar.apply {
-            findViewById<ImageButton>(R.id.icon_power).setOnClickListener {
-                toggleBackgroundMusic()
-            }
-            findViewById<ImageButton>(R.id.icon_share).setOnClickListener {
-                shareApp()
-            }
+        binding.toolbar.findViewById<ImageButton>(R.id.icon_instructions).setOnClickListener {
+            // Usar NavController para navegar a InstructionsFragment
+            findNavController().navigate(R.id.action_homeMain_to_instructions)
         }
-    }
 
-    private fun setupBackgroundMusic() {
-        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.background_music).apply {
-            isLooping = true
-            start()
+        binding.toolbar.findViewById<ImageButton>(R.id.icon_star).setOnClickListener {
+            // Usar NavController para navegar a RateFragment
+            findNavController().navigate(R.id.action_homeMain_to_rate)
         }
-    }
 
-    private fun setupBlinkingButton() {
-        val blinkAnimation = AlphaAnimation(0.0f, 1.0f).apply {
-            duration = 500
-            repeatMode = AlphaAnimation.REVERSE
-            repeatCount = AlphaAnimation.INFINITE
+        binding.toolbar.findViewById<ImageButton>(R.id.icon_add_challenges).setOnClickListener {
+            // Usar NavController para navegar a ChallengeFragment (asegúrate de tener la acción configurada)
+            findNavController().navigate(R.id.action_homeMain_to_challenge)
         }
-        binding.btnPressMe.startAnimation(blinkAnimation)
-        binding.btnPressMe.setOnClickListener {
-            it.clearAnimation()
-            playRandomBottleSpinSound()
-        }
-    }
-
-    private fun setupShareButton() {
-        binding.toolbar.findViewById<ImageButton>(R.id.icon_share).setOnClickListener {
-            shareApp()
-        }
-    }
-
-    private fun toggleBackgroundMusic() {
-        mediaPlayer?.let {
-            if (it.isPlaying) {
-                it.pause()
-            } else {
-                it.start()
-            }
-        }
-    }
-
-    private fun playRandomBottleSpinSound() {
-        val randomSound = bottleSpinSounds[Random.nextInt(bottleSpinSounds.size)]
-        bottleSpinPlayer = MediaPlayer.create(requireContext(), randomSound).apply {
-            start()
-            setOnCompletionListener { release() }
-        }
-    }
-
-    private fun shareApp() {
-        val shareIntent = Intent(Intent.ACTION_SEND).apply {
-            type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, "¡Prueba esta increíble app! https://play.google.com/store/apps/details?id=com.example.picobotella2")
-        }
-        startActivity(Intent.createChooser(shareIntent, "Compartir vía"))
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-        mediaPlayer?.release()
-        mediaPlayer = null
-        bottleSpinPlayer?.release()
     }
 }
+
+
+
 
