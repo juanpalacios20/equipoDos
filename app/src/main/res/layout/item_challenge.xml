@@ -5,8 +5,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:padding="8dp"
-              android:background="@android:color/white"
-              android:layout_marginBottom="8dp">
+              android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +27,7 @@
             android:gravity="end">
 
             <ImageButton
-                android:id="@+id/editChallenge"
+                android:id="@+id/btnEditar"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginEnd="8dp"
@@ -38,7 +37,7 @@
                 tools:ignore="MissingConstraints" />
 
             <ImageButton
-                android:id="@+id/deleteChallenge"
+                android:id="@+id/btnEliminar"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@color/white"
@@ -48,9 +47,15 @@
 
         </LinearLayout>
     </LinearLayout>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginVertical="10dp"/>
 
     <TextView
-        android:id="@+id/challengeDescription"
+        android:id="@+id/tvDescripcion"
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:paddingStart="8dp"

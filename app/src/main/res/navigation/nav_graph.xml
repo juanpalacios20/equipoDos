@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_host_fragment"
+    app:startDestination="@id/homeMain">
+    <fragment
+        android:id="@+id/homeMain"
+        android:name="com.example.picobotella2_equipodos.view.home.HomeFragment"
+        android:label="HomeMain">
+        <action
+            android:id="@+id/action_homeMain_to_instructions"
+            app:destination="@id/instructions" />
+        <action
+            android:id="@+id/action_homeMain_to_rate"
+            app:destination="@id/rate" />
+        <action
+            android:id="@+id/action_homeMain_to_challenge"
+            app:destination="@id/challenge" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/instructions"
+        android:name="com.example.picobotella2_equipodos.view.fragment.InstructionsFragment"
+        android:label="Instructions" />
+    <action
+        android:id="@+id/action_instructions_to_homeMain"
+        app:destination="@+id/homeMain" />
+
+    <fragment
+        android:id="@+id/challenge"
+        android:name=" "
+        android:label="Challenge" />
+    <action
+        android:id="@+id/action_challenge_to_homeMain"
+        app:destination="@+id/homeMain" />
+
+    <fragment
+        android:id="@+id/rate"
+        android:name="com.example.picobotella2_equipodos.view.fragment.RateFragment"
+        android:label="Rate" />
+
+</navigation>

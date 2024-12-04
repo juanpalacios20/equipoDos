@@ -28,7 +28,7 @@
         android:text="Descripción del reto a eliminar"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        android:gravity="center"
+        android:gravity="left"
         android:padding="10dp" />
 
     <!-- Botones de acción (NO y SI) -->
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:gravity="center"
+        android:gravity="right"
         android:orientation="horizontal">
 
         <!-- Botón NO -->

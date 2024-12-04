@@ -34,7 +34,6 @@ class SplashActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, LoginFragment()) // Asegúrate de tener un contenedor en el layout de la actividad
                 .commit()
-
         }, splashTimeOut)
     }
 }

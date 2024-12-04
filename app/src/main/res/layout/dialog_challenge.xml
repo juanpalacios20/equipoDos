@@ -4,7 +4,10 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent">
 
+
+
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/layer_background"
@@ -49,5 +52,7 @@
 
     </RelativeLayout>
 </FrameLayout>
+
+
 
 

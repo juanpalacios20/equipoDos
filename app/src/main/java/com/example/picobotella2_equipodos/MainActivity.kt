@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         bottleIcon.startAnimation(rotateAnimation)
+
+        
     }
 
     // Método para cambiar fragmentos
@@ -42,4 +44,5 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 }
+
 
