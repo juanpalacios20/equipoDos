@@ -1,53 +1,81 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/layer_background"
-        android:padding="20dp"
-        android:clipToPadding="false"
-        android:paddingBottom="40dp">
+        android:layout_height="847dp"
+        android:background="@android:color/transparent">
 
-        <!-- Contenido de la vista de diálogo -->
-        <ImageView
-            android:id="@+id/pokemonImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/circle_background"
-            android:padding="10dp"
-            android:layout_marginBottom="20dp"
-            android:clipToOutline="true" />
-
-        <TextView
-            android:id="@+id/challengeText"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/pokemonImage"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:padding="10dp" />
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/dialog_background"
+            app:layout_constraintBottom_toTopOf="@+id/dialogButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:paddingBottom="0dp">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/circleImageView"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="-30dp"
+                        android:src="@drawable/circle_background" />
+
+
+                    <ImageView
+                        android:id="@+id/pokemonImageView"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/dialogMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- Botón con superposición parcial sobre el borde del diálogo -->
         <Button
-            android:id="@+id/closeButton"
+            android:id="@+id/dialogButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/challengeText"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="-24dp"
             android:backgroundTint="@color/orange"
             android:text="Cerrar"
-            android:textColor="#FFFFFF"
-            android:layout_marginBottom="-20dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frameLayout" />
 
-    </RelativeLayout>
-</FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
 
 

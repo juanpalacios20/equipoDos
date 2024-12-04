@@ -2,21 +2,29 @@ package com.example.picobotella2_equipodos
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
-
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.picobotella2_equipodos.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-        val bottleIcon: ImageView = findViewById(R.id.bottleIcon)
+        setContentView(R.layout.activity_main)
 
-        // Carga la animación de rotación
-        val rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.animated_bottle)
+        // Encuentra el NavController
+        navController = findNavController(R.id.nav_host_fragment)
 
-        // Inicia la animación
-        bottleIcon.startAnimation(rotateAnimation)
+        // Configura el ActionBar (si lo necesitas)
+        setupActionBarWithNavController(navController)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
+
 

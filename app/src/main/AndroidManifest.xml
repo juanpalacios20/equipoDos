@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,6 +14,7 @@
         android:theme="@style/Theme.PicoBotella"
         tools:targetApi="33">
 
+        <!-- SplashActivity como punto de entrada -->
         <activity
             android:name=".view.home.SplashActivity"
             android:exported="true">
@@ -23,6 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".view.TestDB"
+            android:exported="true" />
         <activity
             android:name=".view.home.HomeActivity"
             android:exported="true">
@@ -44,5 +53,4 @@
 
         <service android:name=".music.MusicService" />
     </application>
-
 </manifest>
