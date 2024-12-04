@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
@@ -25,7 +26,7 @@ import com.google.android.material.textfield.TextInputLayout
 import org.w3c.dom.Text
 
 class RetoActivity : AppCompatActivity() {
-
+    private lateinit var botonBack: ImageButton
     private lateinit var lvRetos: ListView
     private lateinit var retoViewModel: RetoViewModel
     private lateinit var btnAgregarReto: FloatingActionButton
@@ -36,6 +37,7 @@ class RetoActivity : AppCompatActivity() {
 
         lvRetos = findViewById(R.id.lvRetos)
         btnAgregarReto = findViewById(R.id.btnAgregarReto)
+        botonBack = findViewById(R.id.back)
 
         retoViewModel = ViewModelProvider(this).get(RetoViewModel::class.java)
 
@@ -55,6 +57,7 @@ class RetoActivity : AppCompatActivity() {
             mostrarDialogoAgregarReto()
         }
     }
+
 
     private fun mostrarDialogoAgregarReto() {
         val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_add_challenge, null)
