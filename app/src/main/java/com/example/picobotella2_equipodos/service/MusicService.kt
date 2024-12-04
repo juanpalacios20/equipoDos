@@ -1,4 +1,4 @@
-package com.example.picobotella2_equipodos.webService
+package com.example.picobotella2_equipodos.service
 
 import android.app.Service
 import android.content.Intent
