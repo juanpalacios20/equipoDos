@@ -3,6 +3,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#e25824</color>
-    <color name="dark_gray">#1f2937</color>
-    <color name="gray">#BDBDBD</color>
+    <color name="orange_dark">#CC3200</color>
+    <color name="dark_gray">#111827</color>
+    <color name="gray">#9EA1A1</color>
+    <color name="colorPrimary">#FF3D00</color> <!-- Naranja -->
+    <color name="colorAccent">#FF3D00</color>
+    <color name="red">#FF0000</color> <!-- Naranja -->
 </resources>

@@ -1,29 +1,47 @@
 package com.example.picobotella2_equipodos
 
 import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.picobotella2_equipodos.databinding.ActivityMainBinding
+import androidx.fragment.app.Fragment
+import com.example.picobotella2_equipodos.auth.LoginFragment
+
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_splash)
 
-        // Encuentra el NavController
-        navController = findNavController(R.id.nav_host_fragment)
+        val bottleIcon: ImageView = findViewById(R.id.bottleIcon)
 
-        // Configura el ActionBar (si lo necesitas)
-        setupActionBarWithNavController(navController)
+        // Carga la animación
+        val rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.animated_bottle)
+
+        // Listener para ejecutar algo al terminar la animación
+        rotateAnimation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {}
+
+            override fun onAnimationEnd(animation: Animation?) {
+                // Muestra el LoginFragment cuando termine el Splash Screen
+                showFragment(LoginFragment())
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {}
+        })
+
+        bottleIcon.startAnimation(rotateAnimation)
+
+        
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+    // Método para cambiar fragmentos
+    private fun showFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
     }
 }
 

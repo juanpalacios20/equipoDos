@@ -1,15 +1,18 @@
+
 plugins {
     alias(libs.plugins.kotlin.android)
     id("com.android.application")
     id("com.google.gms.google-services")
 
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+
+    id("com.google.gms.google-services")
+
 }
 
 android {
     namespace = "com.example.picobotella2_equipodos"
     compileSdk = 35
+
 
     defaultConfig {
         applicationId = "com.example.picobotella2_equipodos"
@@ -18,6 +21,7 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -53,6 +57,10 @@ android {
             }
         }
     }
+    buildFeatures {
+        viewBinding = true // Activar View Binding de forma correcta
+    }
+
 }
 
 dependencies {
@@ -73,9 +81,16 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
     implementation("com.github.bumptech.glide:glide:4.15.1")
     implementation("com.android.volley:volley:1.2.1")
+    implementation ("com.google.android.material:material:1.9.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation ("com.google.firebase:firebase-auth-ktx")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.0")
+    implementation("androidx.fragment:fragment-ktx:1.5.7")
+    implementation ("com.google.android.material:material:1.9.0")
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.47")
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     kapt("com.google.dagger:hilt-android-compiler:2.47")

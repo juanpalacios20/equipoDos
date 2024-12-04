@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
+    <!-- Icono de la botella -->
     <ImageView
         android:id="@+id/bottleIcon"
         android:layout_width="100dp"
@@ -12,6 +13,7 @@
         android:src="@drawable/bottle_icon"
         android:contentDescription="@string/bottle_icon_desc" />
 
+    <!-- Texto debajo de la botella -->
     <TextView
         android:id="@+id/text_pico_botella"
         android:layout_width="wrap_content"
@@ -24,5 +26,10 @@
         android:textSize="40sp"
         android:textStyle="bold"
         android:fontFamily="@font/holenvintage"/>
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"/>
 
+</RelativeLayout>

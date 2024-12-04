@@ -1,0 +1,131 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#000000">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pico botella"
+        android:textColor="#FF3D00"
+        android:textSize="28sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:textStyle="bold"/>
+
+    <!-- Campo de Email -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="200dp"
+        app:hintTextColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        app:boxStrokeWidth="2dp"
+        app:boxStrokeWidthFocused="3dp"
+        app:boxBackgroundMode="outline"
+        app:counterEnabled="true"
+        app:counterMaxLength="40">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:maxLength="40"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+    <!-- Campo de Contraseña -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@id/tilEmail"
+        android:layout_marginTop="40dp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeWidth="2dp"
+        app:hintTextColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        app:helperTextEnabled="true"
+        app:helperText="Mínimo 6 dígitos"
+        app:endIconMode="password_toggle">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+    android:maxLength="10"
+    android:textColorHint="@color/white"
+    android:textColor="@color/white"
+    android:backgroundTint="@color/white" />
+</com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+    <!-- Botón de Login -->
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tilPassword"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="40dp"
+        android:enabled="false"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/orange"
+        android:textColor="#CC3200"/> <!-- Asegúrate de usar el color directamente -->
+
+
+    <!-- Botón de Registrarse -->
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Registrarse"
+        android:textColor="#9EA1A1"
+        android:textSize="16sp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="280dp"
+        android:gravity="center" />
+
+    <!-- Ondas Blancas -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="344dp"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/wave_shape" />
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+</RelativeLayout>
+
