@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.picobotella2_equipodos.auth.LoginFragment
 
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,17 +31,14 @@ class MainActivity : AppCompatActivity() {
             override fun onAnimationRepeat(animation: Animation?) {}
         })
 
+        // Inicia la animación
         bottleIcon.startAnimation(rotateAnimation)
-
-        
     }
 
-    // Método para cambiar fragmentos
+    // Método para cargar fragmentos en el FrameLayout
     private fun showFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
     }
 }
-
-
