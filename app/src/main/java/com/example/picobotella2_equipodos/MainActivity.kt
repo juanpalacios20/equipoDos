@@ -42,10 +42,4 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    // Sobrescribir el método onBackPressed para salir de la aplicación sin cerrar sesión
-    override fun onBackPressed() {
-        onBackPressedDispatcher.onBackPressed()  // Usar el nuevo enfoque para manejar el botón de atrás
-        finishAffinity()  // Cierra todas las actividades, pero mantiene la sesión activa
-    }
-
 }
