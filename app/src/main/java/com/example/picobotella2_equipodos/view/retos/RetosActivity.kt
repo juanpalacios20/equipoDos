@@ -53,6 +53,10 @@ class RetoActivity : AppCompatActivity() {
             lvRetos.adapter = adapter
         })
 
+        botonBack.setOnClickListener() {
+            finish()
+        }
+
         btnAgregarReto.setOnClickListener {
             mostrarDialogoAgregarReto()
         }
