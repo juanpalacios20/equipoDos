@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.picobotella2_equipodos.R
+import com.example.picobotella2_equipodos.auth.LoginFragment
 import com.example.picobotella2_equipodos.databinding.HomeBinding
 import com.example.picobotella2_equipodos.view.retos.RetoActivity
 import java.util.*
@@ -84,6 +85,15 @@ class HomeFragment : Fragment() {
             if (!isSpinning) {
                 startSpinning(bottleIcon, timerText, btnPressMe)
             }
+        }
+
+        binding.toolbar.findViewById<ImageButton>(R.id.icon_logout).setOnClickListener {
+            // Reemplazar el fragmento actual con InstructionsFragment usando FragmentManager
+            val loginFragment = LoginFragment()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, loginFragment) // 'fragment_container' es el contenedor de tu fragmento en el layout
+                .addToBackStack(null) // Añadir a la pila para poder navegar hacia atrás
+                .commit()
         }
     }
 

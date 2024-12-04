@@ -25,5 +25,7 @@ class AuthRepository{
         }
     }
 
+
+
     fun isUserLoggedIn(): Boolean = auth.currentUser != null
 }
