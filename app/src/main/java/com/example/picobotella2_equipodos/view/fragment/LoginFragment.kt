@@ -1,4 +1,4 @@
-package com.example.picobotella2_equipodos.auth
+package com.example.picobotella2_equipodos.view.fragment
 
 import AuthViewModel
 import android.graphics.Typeface

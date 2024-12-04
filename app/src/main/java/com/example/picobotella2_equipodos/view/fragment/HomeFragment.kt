@@ -1,23 +1,12 @@
-package com.example.picobotella2_equipodos.view.home
+package com.example.picobotella2_equipodos.view.fragment
 
-import android.content.Context
-import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
-import android.view.animation.AnimationUtils
 import android.widget.ImageButton
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.picobotella2_equipodos.R
 import com.example.picobotella2_equipodos.databinding.HomeBinding
-import kotlin.random.Random
 
 class HomeFragment : Fragment() {
 
@@ -28,7 +17,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.toolbar.findViewById<ImageButton>(R.id.icon_instructions).setOnClickListener {
-            // Usar NavController para navegar a InstructionsFragment
             findNavController().navigate(R.id.action_homeMain_to_instructions)
         }
 

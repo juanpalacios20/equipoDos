@@ -2,13 +2,13 @@ package com.example.picobotella2_equipodos.view.home
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.picobotella2_equipodos.R
-import com.example.picobotella2_equipodos.auth.LoginFragment
-
+import com.example.picobotella2_equipodos.view.fragment.LoginFragment
 
 class SplashActivity : AppCompatActivity() {
     private val splashTimeOut: Long = 5000 // 5 segundos
@@ -29,7 +29,7 @@ class SplashActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         // Esperar 5 segundos antes de cambiar a LoginFragment
-        Handler().postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
             // Cargar LoginFragment
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, LoginFragment()) // Asegúrate de tener un contenedor en el layout de la actividad
@@ -37,4 +37,3 @@ class SplashActivity : AppCompatActivity() {
         }, splashTimeOut)
     }
 }
-
