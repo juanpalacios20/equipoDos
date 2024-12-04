@@ -1,4 +1,4 @@
-package com.example.picobotella.viewmodel
+package com.example.picobotella2_equipodos.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
