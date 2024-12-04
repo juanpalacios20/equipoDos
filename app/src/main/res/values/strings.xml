@@ -10,4 +10,5 @@
     <string name="presi_name">Presióname</string>
     <string name="icono_de_volver">Icono de volver</string>
     <string name="share" />
+    <string name="icono_de_cerrar_sesion">Icono de cerrar sesion</string>
 </resources>
