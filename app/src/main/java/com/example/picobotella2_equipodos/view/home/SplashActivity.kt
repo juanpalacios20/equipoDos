@@ -8,7 +8,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.picobotella2_equipodos.R
-import com.example.picobotella2_equipodos.view.fragment.LoginFragment
+import com.example.picobotella2_equipodos.auth.LoginFragment
 
 class SplashActivity : AppCompatActivity() {
     private val splashTimeOut: Long = 5000 // 5 segundos
