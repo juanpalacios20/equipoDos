@@ -52,6 +52,7 @@ class HomeFragment : Fragment() {
         // Configuración del botón para hacer girar la botella
         btnPressMe.setOnClickListener {
             if (!isSpinning) {
+                stopBlinkingButton(btnPressMe) // Detener la animación al presionar el botón
                 startSpinning(bottleIcon, timerText, btnPressMe)
             }
         }
@@ -64,6 +65,10 @@ class HomeFragment : Fragment() {
             repeatCount = AlphaAnimation.INFINITE  // Repetir infinitamente
         }
         button.startAnimation(blinkAnimation)
+    }
+
+    private fun stopBlinkingButton(button: ImageButton) {
+        button.clearAnimation()  // Detener la animación de parpadeo
     }
 
     private fun startSpinning(bottleIcon: ImageView, timerText: TextView, btnPressMe: ImageButton) {
@@ -114,6 +119,9 @@ class HomeFragment : Fragment() {
                 showChallenge()
                 btnPressMe.isEnabled = true  // Reactivar el botón
                 btnPressMe.visibility = View.VISIBLE  // Asegurarse de que el botón sea visible
+
+                // Reiniciar la animación después de cerrar el reto
+                startBlinkingButton(btnPressMe)
             }
         }.start()
     }
@@ -121,6 +129,8 @@ class HomeFragment : Fragment() {
     private fun showChallenge() {
         val dialog = ChallengeDialogFragment()
         dialog.show(childFragmentManager, "challengeDialog")
+
+        // También puedes manejar la lógica para cerrar el diálogo y reiniciar el parpadeo en ese punto.
     }
 
     override fun onPause() {
