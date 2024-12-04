@@ -4,6 +4,7 @@ import com.google.firebase.firestore.DocumentId
 
 data class Challenge(
     @DocumentId
-    var id: String? = null,
-    val description: String = ""
+    var id: String = "",
+    val description: String = "",
+    val timestamp: Long = System.currentTimeMillis()
 )

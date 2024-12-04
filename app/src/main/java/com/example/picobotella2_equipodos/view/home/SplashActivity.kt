@@ -27,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
         // Esperar 5 segundos antes de cambiar a la MainActivity
         Handler().postDelayed({
             // Iniciar la actividad principal después de 5 segundos
-            val intent = Intent(this, HomeFragment::class.java) // Cambia InicioActivity por el nombre de tu actividad principal
+            val intent = Intent(this, HomeActivity::class.java)      // Cambia InicioActivity por el nombre de tu actividad principal
             startActivity(intent)
             finish() // Cierra la SplashActivity para que no vuelva al presionar atrás
         }, splashTimeOut)

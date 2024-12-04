@@ -2,28 +2,29 @@ package com.example.picobotella2_equipodos
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.example.picobotella2_equipodos.view.home.HomeFragment
-import com.example.picobotella2_equipodos.view.fragment.InstructionsFragment
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
-
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.example.picobotella2_equipodos.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Comprueba si no hay fragmentos cargados (por ejemplo, tras una rotación)
-        if (savedInstanceState == null) {
-            loadFragment(HomeFragment())
-        }
+        // Encuentra el NavController
+        navController = findNavController(R.id.nav_host_fragment)
+
+        // Configura el ActionBar (si lo necesitas)
+        setupActionBarWithNavController(navController)
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
+
 

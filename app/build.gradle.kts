@@ -41,6 +41,11 @@ android {
         dataBinding = true
     }
 
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true // Aquí es donde habilitas ViewBinding
+    }
+
     applicationVariants.all {
         kotlin.sourceSets {
             getByName(name) {
@@ -51,6 +56,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.navigation.ui.ktx)
+    kapt ("com.google.dagger:dagger-compiler:2.x")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -81,4 +88,6 @@ dependencies {
     //cargar gif
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+
+
 }
