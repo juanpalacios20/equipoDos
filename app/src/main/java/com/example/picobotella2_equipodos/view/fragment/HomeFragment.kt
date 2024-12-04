@@ -2,11 +2,10 @@ package com.example.picobotella2_equipodos.view.fragment
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.RotateAnimation
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.picobotella2_equipodos.R
 import com.example.picobotella2_equipodos.databinding.HomeBinding
+import com.example.picobotella.music.MusicManager
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -73,58 +73,55 @@ class HomeFragment : Fragment() {
     private fun startSpinning(bottleIcon: ImageView, timerText: TextView, btnPressMe: ImageButton) {
         // Deshabilitar el botón
         btnPressMe.isEnabled = false
-        btnPressMe.visibility = ImageButton.INVISIBLE
+        btnPressMe.visibility = View.INVISIBLE
 
-        // Generar una rotación aleatoria
-        val randomRotation = Random().nextFloat() * maxRotation
-        val rotateAnimation = RotateAnimation(lastRotation, randomRotation,
-            RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f)
-        rotateAnimation.duration = spinDuration
-        rotateAnimation.fillAfter = true
+        // Pausar la música de fondo
+        // (Solo si tienes un MusicManager similar al del código base)
+        MusicManager.pauseMusic()
 
-        // Iniciar la animación de rotación
-        bottleIcon.startAnimation(rotateAnimation)
-
-        // Reproducir el sonido de la botella girando
+        // Reproducir sonido de giro
         mediaPlayer.start()
 
-        // Detener la rotación
-        Handler().postDelayed({
-            stopSpinning(bottleIcon, timerText, randomRotation, btnPressMe)
-        }, spinDuration)
+        // Configurar rotación
+        val randomRotation = (3600 + Random().nextInt(360)).toFloat()
+        bottleIcon.rotation = lastRotation
+        bottleIcon.animate().rotation(lastRotation + randomRotation)
+            .setDuration(spinDuration)
+            .withEndAction {
+                lastRotation = (lastRotation + randomRotation) % 360
+                stopSpinning(timerText, btnPressMe)
+            }
+            .start()
     }
 
-    private fun stopSpinning(bottleIcon: ImageView, timerText: TextView, finalRotation: Float, btnPressMe: ImageButton) {
-        // Detener el sonido
-        mediaPlayer.pause()
+    private fun stopSpinning(timerText: TextView, btnPressMe: ImageButton) {
+        // Detener sonido
+        mediaPlayer.stop()
 
-        // Actualizar la última dirección de la botella
-        lastRotation = finalRotation
+        // Reanudar música de fondo
+        MusicManager.startMusic(requireContext())
 
-        // Mostrar la cuenta regresiva
+        // Iniciar cuenta regresiva
         startCountdown(timerText, btnPressMe)
     }
 
     private fun startCountdown(timerText: TextView, btnPressMe: ImageButton) {
-        var timeLeft = 3
-        val handler = Handler()
+        timerText.visibility = View.VISIBLE
 
-        // Mostrar el contador
-        val runnable = object : Runnable {
-            override fun run() {
-                timerText.text = timeLeft.toString()
-                timeLeft--
-
-                if (timeLeft >= 0) {
-                    handler.postDelayed(this, 1000)
-                } else {
-                    showChallenge()
-                }
+        object : CountDownTimer(3100, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timerText.text = (millisUntilFinished / 1000).toInt().toString()
             }
-        }
 
-        handler.post(runnable)
+            override fun onFinish() {
+                timerText.visibility = View.INVISIBLE
+                showChallenge()
+                btnPressMe.isEnabled = true
+                btnPressMe.visibility = View.VISIBLE
+            }
+        }.start()
     }
+
 
     private fun showChallenge() {
         val dialog = ChallengeDialogFragment()
