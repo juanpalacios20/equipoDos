@@ -104,6 +104,17 @@ class HomeFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+        binding.toolbar.findViewById<ImageButton>(R.id.icon_share).setOnClickListener {
+            // Navegar a la actividad RetoActivity
+            val enlaceApp = "https://play.google.com/store/apps/details?id=com.nequi.MobileApp&hl=es_CO&pli=1"
+            val intentCompartir = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_SUBJECT, "App pico botella")
+                putExtra(Intent.EXTRA_TEXT, "Solo los valientes lo juegan!! $enlaceApp")
+            }
+            startActivity(Intent.createChooser(intentCompartir, "Compartir usando"))
+        }
+
     }
 
 
