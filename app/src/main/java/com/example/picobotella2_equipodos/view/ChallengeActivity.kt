@@ -41,6 +41,8 @@ class ChallengeActivity : AppCompatActivity() {
         val binding = LayoutInflater.from(this).inflate(R.layout.dialog_challenge, null)
         dialog.setContentView(binding)
 
+        dialog.setCanceledOnTouchOutside(false)
+
         // Referenciamos las vistas
         val pokemonImageView = binding.findViewById<ImageView>(R.id.pokemonImage)
         val dialogMessage = binding.findViewById<TextView>(R.id.challengeText)
