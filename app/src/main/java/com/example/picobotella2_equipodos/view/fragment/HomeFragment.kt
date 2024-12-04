@@ -8,19 +8,16 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.picobotella2_equipodos.R
-import com.example.picobotella2_equipodos.auth.LoginFragment
 import com.example.picobotella2_equipodos.databinding.HomeBinding
+import com.example.picobotella2_equipodos.view.ChallengeActivity
 import com.example.picobotella2_equipodos.service.music.MusicManager
-import com.example.picobotella2_equipodos.view.retos.RetoActivity
 import java.util.*
-import com.example.picobotella2_equipodos.view.fragment.InstructionsFragment
-
 
 class HomeFragment : Fragment() {
 
@@ -61,44 +58,17 @@ class HomeFragment : Fragment() {
         val bottleIcon: ImageView = binding.bottleIcon
         val timerText: TextView = binding.timerText
 
-        // Inicializar MediaPlayer para el sonido de la botella girando
-        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.spin_sound)
-        mediaPlayer.isLooping = false
-
-        // Configuración del botón de instrucciones
-        binding.toolbar.findViewById<ImageButton>(R.id.icon_instructions).setOnClickListener {
-            // Reemplazar el fragmento actual con InstructionsFragment usando FragmentManager
-            val instructionsFragment = InstructionsFragment.newInstance()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, instructionsFragment) // 'fragment_container' es el contenedor de tu fragmento en el layout
-                .addToBackStack(null) // Añadir a la pila para poder navegar hacia atrás
-                .commit()
-        }
-
-        binding.toolbar.findViewById<ImageButton>(R.id.icon_star).setOnClickListener {
-            // Crear instancia del fragmento RateFragment
-            val rateFragment = RateFragment()
-
-            // Iniciar una transacción de fragmentos
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, rateFragment) // Asegúrate de que 'fragment_container' sea el ID del contenedor de fragmentos en tu layout
-                .addToBackStack(null) // Agregar a la pila para permitir navegación hacia atrás
-                .commit()
-        }
-
-        // Configuración del botón de agregar retos
-        binding.toolbar.findViewById<ImageButton>(R.id.icon_add_challenges).setOnClickListener {
-            // Navegar a la actividad RetoActivity
-            val intent = Intent(requireContext(), RetoActivity::class.java)
-            startActivity(intent)
-        }
+        // Hacer que el botón titile (parpadee)
+        startBlinkingButton(btnPressMe)
 
         // Configuración del botón para hacer girar la botella
         btnPressMe.setOnClickListener {
             if (!isSpinning) {
+                stopBlinkingButton(btnPressMe) // Detener la animación al presionar el botón
                 startSpinning(bottleIcon, timerText, btnPressMe)
             }
         }
+    }
 
         binding.toolbar.findViewById<ImageButton>(R.id.icon_logout).setOnClickListener {
             // Opcional: Actualiza el estado del ViewModel si es necesario
@@ -109,7 +79,17 @@ class HomeFragment : Fragment() {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, LoginFragment())
                 .commit()
+    private fun startBlinkingButton(button: ImageButton) {
+        val blinkAnimation = AlphaAnimation(1f, 0f).apply {
+            duration = 1000  // Duración de un ciclo de animación
+            repeatMode = AlphaAnimation.REVERSE  // Reverso para que parpadee
+            repeatCount = AlphaAnimation.INFINITE  // Repetir infinitamente
         }
+        button.startAnimation(blinkAnimation)
+    }
+
+    private fun stopBlinkingButton(button: ImageButton) {
+        button.clearAnimation()  // Detener la animación de parpadeo
     }
 
     private fun toggleAudioState(icon: ImageButton) {
@@ -144,8 +124,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun startSpinning(bottleIcon: ImageView, timerText: TextView, btnPressMe: ImageButton) {
-        btnPressMe.isEnabled = false
-        btnPressMe.visibility = View.INVISIBLE
+        btnPressMe.isEnabled = false  // Deshabilitar el botón, pero no lo hace desaparecer
 
         // Pausar la música de fondo mientras la botella gira
         MusicManager.pauseMusic()
@@ -192,20 +171,27 @@ class HomeFragment : Fragment() {
             override fun onFinish() {
                 timerText.visibility = View.INVISIBLE
                 showChallenge()
-                btnPressMe.isEnabled = true
-                btnPressMe.visibility = View.VISIBLE
+                btnPressMe.isEnabled = true  // Reactivar el botón
+                btnPressMe.visibility = View.VISIBLE  // Asegurarse de que el botón sea visible
+
+                // Reiniciar la animación después de cerrar el reto
+                startBlinkingButton(btnPressMe)
             }
         }.start()
     }
 
     private fun showChallenge() {
-        val dialog = ChallengeDialogFragment()
-        dialog.show(childFragmentManager, "challengeDialog")
+        // Crear un Intent para abrir ChallengeActivity
+        val intent = Intent(requireContext(), ChallengeActivity::class.java)
+        intent.putExtra("some_key", "some_value")
 
-        // Reactivar el botón
+        startActivity(intent)
+
+        // Reactivar el botón en HomeFragment
         binding.btnPressMe.isEnabled = true
         binding.btnPressMe.visibility = ImageButton.VISIBLE
     }
+
 
     override fun onPause() {
         super.onPause()
