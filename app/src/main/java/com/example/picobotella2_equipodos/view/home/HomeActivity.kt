@@ -10,7 +10,7 @@ import com.example.picobotella2_equipodos.R
 import com.example.picobotella2_equipodos.view.fragment.HomeFragment
 import com.example.picobotella2_equipodos.view.fragment.RateFragment
 
-class HomeActivity : AppCompatActivity(), RateFragment.OnRateButtonClickedListener {
+class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +43,6 @@ class HomeActivity : AppCompatActivity(), RateFragment.OnRateButtonClickedListen
 
 
 
-    override fun onRateButtonClicked() {
-        // Aquí gestionamos lo que debe hacer la actividad cuando se presione el botón de calificación
-        Toast.makeText(this, "Calificación presionada", Toast.LENGTH_SHORT).show()
-    }
+
 }
 
