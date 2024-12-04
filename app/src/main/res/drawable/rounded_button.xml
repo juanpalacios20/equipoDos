@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Estado inactivo -->
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp" />
+            <solid android:color="#FF3D00" /> <!-- Naranja -->
+        </shape>
+    </item>
+    <!-- Estado activo -->
+    <item android:state_enabled="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp" />
+            <solid android:color="#FF3D00" /> <!-- Naranja -->
+        </shape>
+    </item>
+</selector>

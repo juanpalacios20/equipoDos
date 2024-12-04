@@ -14,25 +14,34 @@ class AuthViewModel(private val authRepository: AuthRepository) : ViewModel() {
     private val _registerResult = MutableLiveData<Boolean>()
     val registerResult: LiveData<Boolean> get() = _registerResult
 
-    suspend fun login(email: String, password: String) {
-        // Simula una autenticación
+    suspend fun login(email: String, password: String): Boolean {
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            authRepository.login(email, password)
-            _loginResult.value = true
+            val user = authRepository.login(email, password)
+            if (user != null) {
+                _loginResult.value = true
+            } else {
+                _loginResult.value = false
+            }
         } else {
             _loginResult.value = false
         }
+        return _loginResult.value ?: false
     }
 
-    suspend fun register(email: String, password: String) {
-        // Simula un registro exitoso (esto debería llamarse a un backend real)
+    suspend fun register(email: String, password: String): Boolean {
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            authRepository.register(email, password)
-            _registerResult.value = true
+            val user = authRepository.register(email, password)
+            if (user != null) {
+                _registerResult.value = true
+            } else {
+                _registerResult.value = false
+            }
         } else {
             _registerResult.value = false
         }
+        return _registerResult.value ?: false
     }
+
 
     fun registerUser(email: String, password: String) {
         viewModelScope.launch {

@@ -20,6 +20,7 @@ class AuthRepository{
             val result = auth.createUserWithEmailAndPassword(email, password).await()
             result.user
         } catch (e: Exception) {
+            // Si el error es por un correo ya existente
             null
         }
     }

@@ -1,7 +1,7 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#000000">
 
     <!-- Título -->
@@ -23,18 +23,29 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="200dp">
+        android:layout_marginTop="200dp"
+        app:hintTextColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        app:boxStrokeWidth="2dp"
+        app:boxStrokeWidthFocused="3dp"
+        app:boxBackgroundMode="outline"
+        app:counterEnabled="true"
+        app:counterMaxLength="40">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:maxLength="40"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
     <!-- Campo de Contraseña -->
     <com.google.android.material.textfield.TextInputLayout
@@ -44,19 +55,30 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_below="@id/tilEmail"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="40dp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeWidth="2dp"
+        app:hintTextColor="@color/white"
+        app:boxStrokeColor="@color/white"
+        app:helperTextEnabled="true"
+        app:helperText="Mínimo 6 dígitos"
+        app:endIconMode="password_toggle">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#FFFFFF"
-            android:inputType="textPassword"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+    android:maxLength="10"
+    android:textColorHint="@color/white"
+    android:textColor="@color/white"
+    android:backgroundTint="@color/white" />
+</com.google.android.material.textfield.TextInputLayout>
+
+
+
+
 
     <!-- Botón de Login -->
     <Button
@@ -67,12 +89,13 @@
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:layout_marginTop="40dp"
-        android:backgroundTintMode="add"
-        android:backgroundTint="@color/orange"
+        android:enabled="false"
         android:text="Login"
-        android:textColor="#FFFFFF"
         android:textAllCaps="false"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/orange"
+        android:textColor="#CC3200"/> <!-- Asegúrate de usar el color directamente -->
+
 
     <!-- Botón de Registrarse -->
     <TextView
@@ -85,12 +108,16 @@
         android:text="Registrarse"
         android:textColor="#9EA1A1"
         android:textSize="16sp"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="280dp"
+        android:gravity="center" />
 
     <!-- Ondas Blancas -->
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="344dp"
         android:layout_alignParentBottom="true"
         android:scaleType="fitXY"
         android:src="@drawable/wave_shape" />

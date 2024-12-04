@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "369878605210",
+    "project_id": "equipodos-a6b1d",
+    "storage_bucket": "equipodos-a6b1d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369878605210:android:50504489dc54bfb2d46e23",
+        "android_client_info": {
+          "package_name": "com.example.picobotella2_equipodos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnKg91oZ0anMczqtHnAqat2V1G4tMRlVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

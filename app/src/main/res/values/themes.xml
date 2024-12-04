@@ -1,12 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.PicoBotella" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Cambia el color principal del tema si es necesario -->
     </style>
 
     <style name="Theme.PicoBotella" parent="Base.Theme.PicoBotella" />
+
+    <!-- Desactiva los estilos de botón predeterminados -->
     <style name="ButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:backgroundTint">@null</item>
+        <item name="android:background">@drawable/rounded_button</item> <!-- Aquí te aseguras de que el fondo se aplique desde el selector -->
     </style>
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <!-- Borde siempre blanco -->
+        <item name="boxStrokeColor">@color/white</item>
+        <item name="boxStrokeErrorColor">@color/white</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="counterTextColor">@color/white</item>
+        <item name="counterOverflowTextColor">@color/white</item>
+        <!-- Fondo transparente -->
+        <item name="boxBackgroundColor">@android:color/transparent</item>
+        <!-- Grosor del borde -->
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="boxStrokeWidthFocused">3dp</item>
+    </style>
+
 </resources>
