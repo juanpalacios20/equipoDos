@@ -116,4 +116,5 @@ class RetoActivity : AppCompatActivity() {
         val nuevoReto = Challenge(description = descripcion)
         retoViewModel.agregarReto(nuevoReto)
     }
+
 }

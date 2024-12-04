@@ -37,7 +37,7 @@
             android:exported="true">
         </activity>
 
-        <activity android:name=".view.InstructionsActivity"
+        <activity android:name=".view.ChallengeActivity"
             android:exported="true"
             >
         </activity>
