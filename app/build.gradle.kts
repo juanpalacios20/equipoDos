@@ -34,7 +34,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 
     buildFeatures {
@@ -57,7 +57,6 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
-
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
@@ -71,10 +70,15 @@ dependencies {
     // Hilt
     implementation("com.google.dagger:hilt-android:2.47")
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
     kapt("com.google.dagger:hilt-android-compiler:2.47")
 
     //Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //cargar gif
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 }

@@ -1,36 +1,35 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/wood_background">
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Contenedor para centrar y delimitar la Toolbar -->
-    <LinearLayout
-        android:id="@+id/toolbar_container"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/toolbar_background"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:elevation="4dp">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.fragment.HomeFragment">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <!-- Fondo -->
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:orientation="horizontal"
-            android:contentInsetStartWithNavigation="0dp"
-            android:contentInsetLeft="0dp"
-            android:contentInsetRight="0dp"
-            android:contentInsetEnd="0dp">
+            android:src="@drawable/wood_background"
+            android:scaleType="centerCrop"/>
+
+        <!-- Toolbar personalizada -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/toolbar_background"
+            android:elevation="4dp"
+            android:padding="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <!-- Iconos de la Toolbar -->
                 <ImageButton
@@ -40,7 +39,7 @@
                     android:layout_weight="1"
                     android:contentDescription="@string/icono_de_calificaci_n"
                     android:src="@drawable/ic_star"
-                    android:background="?attr/selectableItemBackgroundBorderless"/>
+                    android:background="?attr/selectableItemBackgroundBorderless" />
 
                 <ImageButton
                     android:id="@+id/icon_power"
@@ -49,7 +48,7 @@
                     android:layout_weight="1"
                     android:contentDescription="@string/icono_de_musica"
                     android:src="@drawable/ic_sound"
-                    android:background="?attr/selectableItemBackgroundBorderless"/>
+                    android:background="?attr/selectableItemBackgroundBorderless" />
 
                 <ImageButton
                     android:id="@+id/icon_instructions"
@@ -58,7 +57,7 @@
                     android:layout_weight="1"
                     android:contentDescription="@string/icono_de_instrucciones"
                     android:src="@drawable/ic_instructions"
-                    android:background="?attr/selectableItemBackgroundBorderless"/>
+                    android:background="?attr/selectableItemBackgroundBorderless" />
 
                 <ImageButton
                     android:id="@+id/icon_add_challenges"
@@ -67,7 +66,7 @@
                     android:layout_weight="1"
                     android:contentDescription="@string/icono_de_agregar_retos"
                     android:src="@drawable/ic_add"
-                    android:background="?attr/selectableItemBackgroundBorderless"/>
+                    android:background="?attr/selectableItemBackgroundBorderless" />
 
                 <ImageButton
                     android:id="@+id/icon_share"
@@ -76,59 +75,54 @@
                     android:layout_weight="1"
                     android:contentDescription="@string/icono_de_compartir"
                     android:src="@drawable/ic_share"
-                    android:background="?attr/selectableItemBackgroundBorderless"/>
+                    android:background="?attr/selectableItemBackgroundBorderless" />
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
-    </LinearLayout>
 
-    <!-- Imagen de la botella -->
-    <ImageView
-        android:id="@+id/bottleIcon"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/bottle_icon"
-        android:contentDescription="@string/bottle_icon_desc" />
+        <!-- Imagen de la botella -->
+        <ImageView
+            android:id="@+id/bottleIcon"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:src="@drawable/bottle_icon"
+            android:contentDescription="@string/bottle_icon_desc" />
 
-    <!-- Contador de tiempo -->
-    <TextView
-        android:id="@+id/timerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4"
-        android:textSize="45sp"
-        android:textColor="@color/orange"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:fontFamily="@font/holenvintage"/>
+        <!-- Contador de tiempo -->
+        <TextView
+            android:id="@+id/timerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="3"
+            android:textSize="55sp"
+            android:textColor="@color/orange"
+            android:gravity="center"
+            android:fontFamily="@font/holenvintage"/>
 
-    <!-- Botón circular -->
-    <ImageButton
-        android:id="@+id/btnPressMe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/circular_button"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:contentDescription="@string/boton_de_juego"
-        android:background="@null" />
-    <TextView
-        android:id="@+id/text_presioname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/bottleIcon"
-        android:layout_centerHorizontal="true"
-        android:text="@string/presi_name"
-        android:textColor="@color/orange"
-        android:textSize="20sp"
-        android:layout_marginTop="245dp"
-        android:fontFamily="@font/holenvintage"/>
+        <!-- Botón circular -->
+        <ImageButton
+            android:id="@+id/btnPressMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="80dp"
+            android:src="@drawable/circular_button"
+            android:contentDescription="@string/boton_de_juego"
+            android:background="@null"/>
 
-</RelativeLayout>
+        <!-- Texto debajo de la botella -->
+        <TextView
+            android:id="@+id/text_presioname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="45dp"
+            android:text="@string/presi_name"
+            android:textColor="@color/orange"
+            android:textSize="20sp"
+            android:fontFamily="@font/holenvintage" />
 
-
-
-
-
+    </FrameLayout>
+</layout>

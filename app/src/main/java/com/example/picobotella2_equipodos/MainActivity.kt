@@ -2,6 +2,9 @@ package com.example.picobotella2_equipodos
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.picobotella2_equipodos.view.home.HomeFragment
+import com.example.picobotella2_equipodos.view.fragment.InstructionsFragment
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 
@@ -9,14 +12,18 @@ import android.widget.ImageView
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-        val bottleIcon: ImageView = findViewById(R.id.bottleIcon)
+        setContentView(R.layout.activity_main)
 
-        // Carga la animación de rotación
-        val rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.animated_bottle)
+        // Comprueba si no hay fragmentos cargados (por ejemplo, tras una rotación)
+        if (savedInstanceState == null) {
+            loadFragment(InstructionsFragment())
+        }
+    }
 
-        // Inicia la animación
-        bottleIcon.startAnimation(rotateAnimation)
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
     }
 }
 
