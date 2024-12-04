@@ -42,7 +42,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:scrollbars="vertical"
-        android:dividerHeight="16dp"/>
+        android:background="@color/dark_gray"
+        android:dividerHeight="16dp"
+        android:divider="@color/dark_gray"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAgregarReto"

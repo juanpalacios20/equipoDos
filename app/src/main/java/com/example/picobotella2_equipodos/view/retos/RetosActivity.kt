@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,7 @@ import com.example.picobotella2_equipodos.viewModel.RetoViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import org.w3c.dom.Text
 
 class RetoActivity : AppCompatActivity() {
 
@@ -55,8 +57,7 @@ class RetoActivity : AppCompatActivity() {
     }
 
     private fun mostrarDialogoAgregarReto() {
-        val dialog = Dialog(this)
-        dialog.setContentView(R.layout.dialog_add_challenge)
+        val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_add_challenge, null)
 
         val etDescripcionReto: EditText = dialog.findViewById(R.id.etDescripcionReto)
         val btnAgregar: Button = dialog.findViewById(R.id.btnAgregar)
@@ -64,6 +65,11 @@ class RetoActivity : AppCompatActivity() {
 
         btnAgregar.isEnabled = false
         btnAgregar.backgroundTintList = ContextCompat.getColorStateList(this, R.color.gray)
+
+        val dialogView = AlertDialog.Builder(this)
+            .setView(dialog)
+            .setCancelable(false)
+            .create()
 
         etDescripcionReto.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -84,27 +90,44 @@ class RetoActivity : AppCompatActivity() {
             if (descripcion.isNotEmpty()) {
                 agregarReto(descripcion)
                 Toast.makeText(this, "Reto guardado", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
+                dialogView.dismiss()
             }
         }
 
         btnCancelar.setOnClickListener {
-            dialog.dismiss()
+            dialogView.dismiss()
         }
 
-        dialog.show()
+        dialogView.show()
     }
 
     fun mostrarConfirmacionEliminarReto(reto: Challenge) {
-        AlertDialog.Builder(this)
-            .setTitle("¿Desea eliminar el siguiente reto?")
-            .setMessage(reto.description)
-            .setPositiveButton("Si") { _, _ ->
-                retoViewModel.eliminarReto(reto)
-                lvRetos.deferNotifyDataSetChanged()
-            }
-            .setNegativeButton("No", null)
-            .show()
+        val dialog = LayoutInflater.from(this).inflate(R.layout.dialog_delete_challenge, null)
+
+        val descripción: TextView = dialog.findViewById(R.id.challengeDescriptionTextView)
+        val btnCerrar: TextView = dialog.findViewById(R.id.noButton)
+        val btnConfirmar: TextView = dialog.findViewById(R.id.yesButton)
+
+        descripción.text = reto.description
+
+        val dialogView = AlertDialog.Builder(this)
+            .setView(dialog)
+            .setCancelable(false)
+            .create()
+
+        btnConfirmar.setOnClickListener {
+            retoViewModel.eliminarReto(reto)
+            lvRetos.deferNotifyDataSetChanged()
+            Toast.makeText(this, "Reto eliminado", Toast.LENGTH_SHORT).show()
+            dialogView.dismiss()
+        }
+
+        btnCerrar.setOnClickListener {
+            dialogView.dismiss()
+
+        }
+
+        dialogView.show()
     }
 
     fun mostrarDialogoEditarReto(reto: Challenge) {
@@ -112,6 +135,7 @@ class RetoActivity : AppCompatActivity() {
 
         val etDescripcion: EditText = dialogView.findViewById(R.id.etDescripcion)
         val btnGuardar: Button = dialogView.findViewById(R.id.btnGuardar)
+        val btnCancelar: Button = dialogView.findViewById(R.id.btnCancelar)
 
         etDescripcion.setText(reto.description)
 
@@ -136,6 +160,7 @@ class RetoActivity : AppCompatActivity() {
 
         val dialog = AlertDialog.Builder(this)
             .setView(dialogView)
+            .setCancelable(false)
             .create()
 
         btnGuardar.setOnClickListener {
@@ -148,6 +173,10 @@ class RetoActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "La descripción no puede estar vacía", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        btnCancelar.setOnClickListener {
+            dialog.dismiss()
         }
 
         dialog.show()
