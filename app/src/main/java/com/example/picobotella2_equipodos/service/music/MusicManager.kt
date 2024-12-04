@@ -14,13 +14,9 @@ object MusicManager {
                 isLooping = true
                 val savedVolume = loadVolume(context)
                 setVolume(savedVolume, savedVolume)
+                start()
             }
-        }
-
-        // Cargar el estado de muteo
-        loadMuteState(context)
-
-        if (!isMuted && mediaPlayer?.isPlaying == false) {
+        } else if (!mediaPlayer!!.isPlaying) {
             mediaPlayer?.start()
         }
     }
@@ -37,30 +33,16 @@ object MusicManager {
         mediaPlayer?.pause()
     }
 
-    fun muteMusic(context: Context) {
+    fun muteMusic() {
         isMuted = true
         mediaPlayer?.pause()
-        saveMuteState(context, isMuted)
     }
 
-    fun unmuteMusic(context: Context) {
+
+    fun unmuteMusic() {
         isMuted = false
         if (mediaPlayer?.isPlaying == false) {
             mediaPlayer?.start()
-        }
-        saveMuteState(context, isMuted)
-    }
-
-    fun loadMuteState(context: Context) {
-        val sharedPref = context.getSharedPreferences("MusicPrefs", Context.MODE_PRIVATE)
-        isMuted = sharedPref.getBoolean("isMuted", false)
-    }
-
-    private fun saveMuteState(context: Context, state: Boolean) {
-        val sharedPref = context.getSharedPreferences("MusicPrefs", Context.MODE_PRIVATE)
-        with(sharedPref.edit()) {
-            putBoolean("isMuted", state)
-            apply()
         }
     }
 

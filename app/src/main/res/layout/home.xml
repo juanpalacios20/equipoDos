@@ -48,7 +48,7 @@
                     android:layout_weight="1"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/icono_de_musica"
-                    android:src="@drawable/ic_sound_on" />
+                    android:src="@drawable/ic_sound" />
 
                 <ImageButton
                     android:id="@+id/icon_instructions"
