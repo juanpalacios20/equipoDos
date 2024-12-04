@@ -14,9 +14,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.picobotella2_equipodos.R
+import com.example.picobotella2_equipodos.auth.LoginFragment
 import com.example.picobotella2_equipodos.databinding.HomeBinding
 import com.example.picobotella2_equipodos.view.ChallengeActivity
 import com.example.picobotella2_equipodos.service.music.MusicManager
+import com.example.picobotella2_equipodos.view.retos.RetoActivity
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -68,17 +70,43 @@ class HomeFragment : Fragment() {
                 startSpinning(bottleIcon, timerText, btnPressMe)
             }
         }
-    }
-
         binding.toolbar.findViewById<ImageButton>(R.id.icon_logout).setOnClickListener {
             // Opcional: Actualiza el estado del ViewModel si es necesario
             // Asegúrate de tener acceso al ViewModel o usa un evento global
 
             // Limpia la pila de retroceso y navega al LoginFragment
-            parentFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            parentFragmentManager.popBackStack(
+                null,
+                androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, LoginFragment())
                 .commit()
+        }
+
+        binding.toolbar.findViewById<ImageButton>(R.id.icon_instructions).setOnClickListener {
+            // Reemplazar el fragmento actual con InstructionsFragment usando FragmentManager
+            val instructionsFragment = InstructionsFragment.newInstance()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, instructionsFragment) // 'fragment_container' es el contenedor de tu fragmento en el layout
+                .addToBackStack(null) // Añadir a la pila para poder navegar hacia atrás
+                .commit()
+        }
+        binding.toolbar.findViewById<ImageButton>(R.id.icon_add_challenges).setOnClickListener {
+            // Navegar a la actividad RetoActivity
+            val intent = Intent(requireContext(), RetoActivity::class.java)
+            startActivity(intent)
+        }
+        binding.toolbar.findViewById<ImageButton>(R.id.icon_star).setOnClickListener {
+            val rateFragment = RateFragment()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, rateFragment) // Asegúrate de usar el contenedor correcto.
+                .addToBackStack(null)
+                .commit()
+        }
+    }
+
+
     private fun startBlinkingButton(button: ImageButton) {
         val blinkAnimation = AlphaAnimation(1f, 0f).apply {
             duration = 1000  // Duración de un ciclo de animación
