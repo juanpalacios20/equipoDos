@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.picobotella2_equipodos.R
 import com.example.picobotella2_equipodos.databinding.HomeBinding
-import com.example.picobotella.music.MusicManager
+import com.example.picobotella2_equipodos.service.music.MusicManager
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -38,6 +38,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Iniciar la música de fondo tan pronto como se cargue la página
+        MusicManager.startMusic(requireContext())
+
         // Inicializar las vistas
         val btnPressMe: ImageButton = binding.btnPressMe
         val bottleIcon: ImageView = binding.bottleIcon
@@ -45,7 +48,7 @@ class HomeFragment : Fragment() {
 
         // Inicializar MediaPlayer para el sonido de la botella girando
         mediaPlayer = MediaPlayer.create(requireContext(), R.raw.spin_sound)
-        mediaPlayer.isLooping = true
+        mediaPlayer.isLooping = false
 
         // Configuración del botón de instrucciones
         binding.toolbar.findViewById<ImageButton>(R.id.icon_instructions).setOnClickListener {
@@ -71,18 +74,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun startSpinning(bottleIcon: ImageView, timerText: TextView, btnPressMe: ImageButton) {
-        // Deshabilitar el botón
         btnPressMe.isEnabled = false
         btnPressMe.visibility = View.INVISIBLE
 
-        // Pausar la música de fondo
-        // (Solo si tienes un MusicManager similar al del código base)
+        // Pausar la música de fondo mientras la botella gira
         MusicManager.pauseMusic()
 
-        // Reproducir sonido de giro
-        mediaPlayer.start()
+        // Crear un nuevo MediaPlayer para cada giro y reproducir sonido de giro
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.spin_sound).apply {
+            isLooping = false
+            start()
+        }
 
-        // Configurar rotación
+        // Configurar rotación aleatoria
         val randomRotation = (3600 + Random().nextInt(360)).toFloat()
         bottleIcon.rotation = lastRotation
         bottleIcon.animate().rotation(lastRotation + randomRotation)
@@ -95,10 +99,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun stopSpinning(timerText: TextView, btnPressMe: ImageButton) {
-        // Detener sonido
+        // Detener el sonido del giro de la botella
         mediaPlayer.stop()
 
-        // Reanudar música de fondo
+        // Reanudar la música de fondo
         MusicManager.startMusic(requireContext())
 
         // Iniciar cuenta regresiva
@@ -122,7 +126,6 @@ class HomeFragment : Fragment() {
         }.start()
     }
 
-
     private fun showChallenge() {
         val dialog = ChallengeDialogFragment()
         dialog.show(childFragmentManager, "challengeDialog")
@@ -134,8 +137,8 @@ class HomeFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        // Pausar el sonido
-        mediaPlayer.pause()
+        // Pausar la música de fondo cuando el fragmento no esté visible
+        MusicManager.pauseMusic()
     }
 
     override fun onDestroyView() {

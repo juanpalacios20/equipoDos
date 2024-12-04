@@ -1,4 +1,4 @@
-package com.example.picobotella2_equipodos.webService
+package com.example.picobotella2_equipodos.service
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

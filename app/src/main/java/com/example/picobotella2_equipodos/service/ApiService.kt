@@ -1,4 +1,4 @@
-package com.example.picobotella2_equipodos.webService
+package com.example.picobotella2_equipodos.service
 import com.example.picobotella2_equipodos.model.Pokedex
 import retrofit2.http.GET
 

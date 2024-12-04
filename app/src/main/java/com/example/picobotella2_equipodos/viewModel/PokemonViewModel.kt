@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.picobotella2_equipodos.model.Pokedex
-import com.example.picobotella2_equipodos.webService.RetrofitClient
+import com.example.picobotella2_equipodos.service.RetrofitClient
 import kotlinx.coroutines.launch
 
 class PokemonViewModel: ViewModel() {
