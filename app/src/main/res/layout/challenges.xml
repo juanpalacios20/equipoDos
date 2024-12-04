@@ -6,38 +6,42 @@
     android:padding="16dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/dark_gray"
-    tools:context=".view.retos.RetoActivity">
+    tools:context=".view.retos.RetoFragment"> <!-- Cambié a RetoFragment para indicar que es un fragmento -->
+
+    <!-- RecyclerView para la lista de retos -->
 
     <ImageButton
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/flecha_atras"
         android:background="@color/dark_gray"
         android:paddingTop="6dp"
-        tools:ignore="MissingConstraints" />
+        android:src="@drawable/flecha_atras"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <TextView
         android:id="@+id/title_reglas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/holenvintage"
+        android:paddingStart="8dp"
         android:text="Retos"
         android:textColor="@color/orange"
         android:textSize="32sp"
-        app:layout_constraintStart_toEndOf="@+id/back"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/back"
         app:layout_constraintEnd_toEndOf="parent"
-        android:paddingStart="8dp" />
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toEndOf="@+id/back"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- RecyclerView para la lista de retos -->
     <ListView
         android:id="@+id/lvRetos"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/back"
+        app:layout_constraintTop_toBottomOf="@+id/title_reglas"
         app:layout_constraintBottom_toTopOf="@+id/btnAgregarReto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
