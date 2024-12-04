@@ -1,26 +1,13 @@
 package com.example.picobotella2_equipodos.repository
 
-import android.app.AlertDialog
-import android.view.LayoutInflater
-import android.view.Window
-import android.widget.ImageView
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.Request
 import com.android.volley.toolbox.Volley
-import com.example.picobotella2_equipodos.R
 import com.example.picobotella2_equipodos.model.Challenge
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import android.content.Context
-import android.util.Log
-import android.widget.Button
-import com.example.picobotella2_equipodos.webService.PokemonApiService
-import com.example.picobotella2_equipodos.webService.RetrofitClient
-import com.example.picobotella2_equipodos.viewModel.PokemonViewModel
-import androidx.activity.viewModels
-import com.bumptech.glide.Glide
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 

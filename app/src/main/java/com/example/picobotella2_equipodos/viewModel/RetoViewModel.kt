@@ -5,10 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bumptech.glide.Glide
 import com.example.picobotella2_equipodos.model.Challenge
 import com.example.picobotella2_equipodos.repository.RetosRepository
-import com.example.picobotella2_equipodos.webService.RetrofitClient
 import kotlinx.coroutines.launch
 
 class RetoViewModel : ViewModel() {
