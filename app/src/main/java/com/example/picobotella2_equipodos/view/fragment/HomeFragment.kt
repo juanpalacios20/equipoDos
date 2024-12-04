@@ -1,5 +1,6 @@
 package com.example.picobotella2_equipodos.view.fragment
 
+import AuthViewModel
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -39,9 +40,18 @@ class HomeFragment : Fragment() {
         _binding = HomeBinding.inflate(inflater, container, false)
         return binding.root
     }
+    private lateinit var viewModel: AuthViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Inicializar el botón de audio
+        val iconPower = binding.toolbar.findViewById<ImageButton>(R.id.icon_power)
+        updateAudioIcon(iconPower)
+
+        // Configuración del clic en el botón de audio
+        iconPower.setOnClickListener {
+            toggleAudioState(iconPower)
+        }
 
         // Iniciar la música de fondo tan pronto como se cargue la página
         MusicManager.startMusic(requireContext())
@@ -91,13 +101,46 @@ class HomeFragment : Fragment() {
         }
 
         binding.toolbar.findViewById<ImageButton>(R.id.icon_logout).setOnClickListener {
-            // Reemplazar el fragmento actual con InstructionsFragment usando FragmentManager
-            val loginFragment = LoginFragment()
+            // Opcional: Actualiza el estado del ViewModel si es necesario
+            // Asegúrate de tener acceso al ViewModel o usa un evento global
+
+            // Limpia la pila de retroceso y navega al LoginFragment
+            parentFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, loginFragment) // 'fragment_container' es el contenedor de tu fragmento en el layout
-                .addToBackStack(null) // Añadir a la pila para poder navegar hacia atrás
+                .replace(R.id.fragment_container, LoginFragment())
                 .commit()
         }
+    }
+
+    private fun toggleAudioState(icon: ImageButton) {
+        if (MusicManager.isMusicMuted()) {
+            MusicManager.unmuteMusic(requireContext())
+        } else {
+            MusicManager.muteMusic(requireContext())
+        }
+        updateAudioIcon(icon)
+    }
+
+    private fun updateAudioIcon(icon: ImageButton) {
+        if (MusicManager.isMusicMuted()) {
+            icon.setImageResource(R.drawable.ic_sound_off)
+        } else {
+            icon.setImageResource(R.drawable.ic_sound_on)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Respetar el estado de muteo al reanudar
+        if (MusicManager.isMusicMuted()) {
+            MusicManager.pauseMusic()
+        } else {
+            MusicManager.startMusic(requireContext())
+        }
+
+        // Actualizar el ícono del botón de sonido
+        val iconPower = binding.toolbar.findViewById<ImageButton>(R.id.icon_power)
+        updateAudioIcon(iconPower)
     }
 
     private fun startSpinning(bottleIcon: ImageView, timerText: TextView, btnPressMe: ImageButton) {
@@ -129,8 +172,10 @@ class HomeFragment : Fragment() {
         // Detener el sonido del giro de la botella
         mediaPlayer.stop()
 
-        // Reanudar la música de fondo
-        MusicManager.startMusic(requireContext())
+        // Reanudar la música solo si no está muteada
+        if (!MusicManager.isMusicMuted()) {
+            MusicManager.startMusic(requireContext())
+        }
 
         // Iniciar cuenta regresiva
         startCountdown(timerText, btnPressMe)
@@ -164,8 +209,9 @@ class HomeFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        // Pausar la música de fondo cuando el fragmento no esté visible
-        MusicManager.pauseMusic()
+        if (!MusicManager.isMusicMuted()) {
+            MusicManager.pauseMusic()
+        }
     }
 
     override fun onDestroyView() {
