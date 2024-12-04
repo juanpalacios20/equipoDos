@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         // Comprueba si no hay fragmentos cargados (por ejemplo, tras una rotación)
         if (savedInstanceState == null) {
-            loadFragment(InstructionsFragment())
+            loadFragment(HomeFragment())
         }
     }
 
